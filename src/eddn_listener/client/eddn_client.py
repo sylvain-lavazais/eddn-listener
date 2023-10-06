@@ -21,7 +21,7 @@ class EddnClient:
 
         self._log = structlog.getLogger()
 
-    def run(self, function: Callable):
+    def run(self, process_message: Callable):
         while True:
             try:
                 self._subscriber.connect(RELAY_ADDRESS)
@@ -30,14 +30,14 @@ class EddnClient:
                     raw_message = self._subscriber.recv()
 
                     if not raw_message:
-                        self._log.debug(f'No new message from EDDN')
+                        self._log.debug('No new message from EDDN')
                         self._subscriber.disconnect(RELAY_ADDRESS)
                         break
-                    self._log.debug(f'Receiving a new message from EDDN')
+                    self._log.debug('Receiving a new message from EDDN')
 
                     eddn_message = json.loads(zlib.decompress(raw_message))
 
-                    function(eddn_message)
+                    process_message(eddn_message)
 
             except zmq.ZMQError as e:
                 self._log.error(f'Error on EDDN accessor {str(e)}')

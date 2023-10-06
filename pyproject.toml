@@ -38,7 +38,7 @@ readme = "README.md" # Optional
 # 'Programming Language' classifiers above, 'pip install' will check this
 # and refuse to install the project if the version does not match. See
 # https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 
 # This is either text indicating the license for the distribution, or a file
 # that contains the license
@@ -51,7 +51,7 @@ license = { file = "LICENSE.txt" }
 # Note that this is a list of additional keywords, separated
 # by commas, to be used to assist searching for the distribution in a
 # larger catalog.
-keywords = ["game", "elite dangerous", "tools", "data extractor"]  # Optional
+keywords = ["game", "elite-dangerous", "tools", "data-extractor"]  # Optional
 
 # This should be your name or the name of the organization who originally
 # authored the project, and a valid email address corresponding to the name
@@ -100,13 +100,14 @@ classifiers = [# Optional
 # For an analysis of this field vs pip's requirements files see:
 # https://packaging.python.org/discussions/install-requires-vs-requirements/
 dependencies = [# Optional
-    "yoyo-migrations",
-    "psycopg2",
-    "psycopg2-binary",
-    "click",
-    "requests",
-    "structlog",
-    "zmq"
+    "yoyo-migrations==8.2.*",
+    "psycopg2==2.9.*",
+    "psycopg2-binary==2.9.*",
+    "click==8.1.*",
+    "requests==2.31.*",
+    "structlog==22.3.*",
+    "zmq==0.0.*",
+    "astraeus-common @ git+ssh://git@github.com/lx-dev-pm/astraeus-common.git@main"
 ]
 
 # List additional groups of dependencies here (e.g. development
@@ -139,7 +140,7 @@ test = ["coverage"]
 # The following would provide a command line executable called `sample`
 # which executes the function `main` from this package when invoked.
 [project.scripts]  # Optional
-edsm-reader = "eddn_listener:command_line"
+eddn-listener = "eddn_listener:command_line"
 
 # This is configuration specific to the `setuptools` build backend.
 # If you are using a different build backend, you will need to change this.
@@ -151,5 +152,5 @@ edsm-reader = "eddn_listener:command_line"
 [build-system]
 # These are the assumed default build requirements from pip:
 # https://pip.pypa.io/en/stable/reference/pip/#pep-517-and-518-support
-requires = ["setuptools>=43.0.0", "wheel"]
+requires = ["setuptools>=43.0.0", "wheel", "build"]
 build-backend = "setuptools.build_meta"
